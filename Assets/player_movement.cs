@@ -5,6 +5,8 @@ using UnityEngine;
 public class player_movement : MonoBehaviour
 {
     public float speed = 0.2f;
+    public float stop = 0.0f;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,24 +16,28 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("speed", stop);
         if (Time.timeScale == 1)
-        {
-            if (Input.GetKey("a"))
+        { 
+            if (Input.GetKey("a"))  
             {
-                transform.position += Vector3.left *speed;
+                transform.position += Vector3.left * speed;
+                animator.SetFloat("speed", speed);
             }
-
             if (Input.GetKey("d"))
             {
-                transform.position += Vector3.right*speed;
+                transform.position += Vector3.right* speed;
+                animator.SetFloat("speed", speed);
             }
             if (Input.GetKey("w"))
             {
-                transform.position += Vector3.up*speed;
+                transform.position += Vector3.up* speed;
+                animator.SetFloat("speed", speed);
             }
             if (Input.GetKey("s"))
             {
-                transform.position += Vector3.down*speed;
+                transform.position += Vector3.down* speed;
+                animator.SetFloat("speed", speed);
             } 
             //Mouse look source.
             //https://nickhwang.com/2020/04/16/unity-tutorial-quick-tip-2d-look-at-mouse/
@@ -44,7 +50,7 @@ public class player_movement : MonoBehaviour
             pos.x = Mathf.Clamp01(pos.x);         
             pos.y = Mathf.Clamp01(pos.y);         
             transform.position = Camera.main.ViewportToWorldPoint(pos);
-        }
+            } 
         if (Input.GetKey("p"))
         {
             if (Time.timeScale == 0)
